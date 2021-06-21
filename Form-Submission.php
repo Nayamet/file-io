@@ -94,11 +94,11 @@
 
                     if($result)
                     {
-                        $successfulMessage= "Success full";
+                        $successfulMessage= "Registration Successful";
                     }
                     else
                     {
-                        $errorMessage="Unsuccessfull";
+                        $errorMessage="Registration Unsuccessful";
                     }
                 }
                 
@@ -199,7 +199,7 @@
             
 
         </form>
-
+        <p><a href="login.php"><b style="color:red;">Click here</b></a>  for login.</p>
 
     </body>
 </html>

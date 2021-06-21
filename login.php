@@ -5,33 +5,34 @@
     </head>
 
     <body>
-        <form  action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST" >
-                <h1>Login Form</h1>
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" >
-                <br><br>
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" pattern=".{4,}" > 
-                 <br><br>
-                <input type="submit" value="submit">
 
+         <?php 
 
-        </form>
-        <?php 
+            $flag=false;
+            $userNameErr=$successfulMessage=$errorMessage=$passwordErr="";
 
-                $flag=false;
-
-                
-        
             if($_SERVER['REQUEST_METHOD']=='POST')
             {
-                $userName=test_name($_POST['username']);
-                $password=test_name($_POST['password']);
+            $userName=test_name($_POST['username']);
+            $password=test_name($_POST['password']);
 
-                $data = file_get_contents("input.txt");
-                $tempData = json_decode($data);
+            if(empty($_POST['username']))
+            {
+                $userNameErr="* User name can not be empty.";
                 
-                foreach($tempData as $tempObject)
+            }
+            if(empty($_POST['password']))
+            {
+                $passwordErr="* Password can not be  empty.";
+                
+                
+            }
+
+            $data = file_get_contents("input.txt");
+            $tempData = json_decode($data);
+            if(!empty($tempData))
+            {
+                    foreach($tempData as $tempObject)
                 {
                     
                     if($tempObject->username==$userName && $tempObject->password==$password)
@@ -40,14 +41,16 @@
                         break;
                     }
                 }
+            }
+            
 
             if($flag)
             {
-                echo "Correct";
+                $successfulMessage="log in successful";
             }
             else
             {
-                echo "failed";
+                $errorMessage="log in failed";
             }
 
             }
@@ -55,12 +58,34 @@
 
             function test_name($data)
             {
-                $data=trim($data);
-                $data=stripcslashes($data);
-                $data=htmlspecialchars($data);
-                return $data;
+            $data=trim($data);
+            $data=stripcslashes($data);
+            $data=htmlspecialchars($data);
+            return $data;
             }
 
         ?>
+        <form  action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="POST" >
+            
+            <h1>Login Form</h1>
+            <fieldset>
+            <Legend>Log in :</Legend>
+                
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" ><span style="color : red;"><?php echo $userNameErr; ?></span>
+                <br><br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" pattern=".{4,}" ><span style="color : red;"><?php echo $passwordErr; ?></span>
+                 <br><br>
+                <input type="submit" value="submit">
+            </fieldset>
+
+        </form>
+
+        <p><a href="Form-Submission.php"><b style="color:red;">Click here</b></a>  for registration.</p>
+
+        <span style =" color : green;"><?php echo "<b>" .$successfulMessage  ."</b>"; ?></span>
+         <span style =" color : green;"><?php echo "<b>" .$errorMessage  ."</b>"; ?></span>
+       
     </body>
 </html>
