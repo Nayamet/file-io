@@ -40,5 +40,19 @@
         "link": "",
         "username": "Fahim",
         "password": "fahim1234"
+    },
+    {
+        "fname": "Anik",
+        "lname": "Mia",
+        "gender": "male",
+        "dob": "2021-06-03",
+        "religion": "Islam",
+        "address": "Dinajpur",
+        "paddress": "Dinajpur",
+        "phone": "01929076363",
+        "email": "rashedahmedsiam65667@gmail.com",
+        "link": "",
+        "username": "Anik",
+        "password": "Anik"
     }
 ]
